@@ -1,0 +1,27 @@
+selects users from the User table who have taken the same training more than once on the same day,
+as per the Training_details table. The output should show each user,
+the training they took, the date,
+and the count of how many times they took it on that date,
+with the results grouped by user and training lesson and ordered from the most recent lesson date to the oldest.
+
+SELECT
+    u.user_id,
+    u.username,
+    td.training_id,
+    td.training_date,
+    COUNT(*) AS count
+FROM
+    User u
+INNER JOIN
+    Training_details td ON u.user_id = td.user_id
+GROUP BY
+    u.user_id,
+    u.username,
+    td.training_id,
+    td.training_date
+HAVING
+    COUNT(*) > 1
+ORDER BY
+    td.training_date DESC,
+    u.user_id,
+    td.training_id;

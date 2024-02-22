@@ -1,0 +1,9 @@
+type FileDTO {
+    id: ID!
+    name: String!
+    itemType: String
+}
+
+type Query {
+    fileMetadata(fileId: ID!, userEmail: String!): FileDTO
+}
